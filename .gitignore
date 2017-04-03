@@ -1,0 +1,12 @@
+# On veut rien de base
+*
+
+# Sauf les .cpp et .hpp
+!*.cpp
+!*.hpp
+# Le Makefile
+!Makefile
+# Et le README
+!README.md
+# Et ce fichier
+!.gitignore
