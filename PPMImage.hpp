@@ -2,6 +2,8 @@
 #include <string>
 #include <fstream>
 
+#include <cassert>
+
 typedef unsigned char color;
 typedef unsigned int coord;
 
@@ -61,17 +63,29 @@ public:
 	 * @param	coord	h	Hauteur du rectangle, en pixels
 	 * @param	RGBColor	col	Couleur à donner au pixel
 	 */
-	void fill(coord xs, coord ys, coord w, coord h, RGBColor col);
+	void fillRect(coord xs, coord ys, coord w, coord h, RGBColor col);
 
-	/** Génére et enregistre le fichier image
+	/**
+	 * Génére et enregistre le fichier image
 	 *
 	 * @param	std::string	path	Chemin du fichier
 	 */
 	void  saveImage(std::string path);
 
+	/**
+	 * Crée et enregistre une image unicolore
+	 *
+	 * @param	coord	width	Largeur de l'image, en pixels
+	 * @param	coord	height	Hauteur de l'image, en pixels
+	 * @param	RGBColor	col	Couleur de l'image
+	 * @param	std::string	path	Chemin de l'image
+	 */
+	static void saveRectangle(coord w, coord h, RGBColor col, std::string path);
+
 private:
 	coord width;
 	coord height;
+	size_t length;
 	struct RGBColor *map;
 
 };
