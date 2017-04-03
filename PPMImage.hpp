@@ -11,6 +11,16 @@ struct RGBColor {
 	color b;
 };
 
+#define White	{255,255,255}
+#define Black	{0,0,0}
+
+#define Red	{255,0,0}
+#define Green	{0,255,0}
+#define Blue	{0,0,255}
+
+#define Yellow	{255,255,0}
+#define Cyan	{0,255,255}
+#define Magenta	{255,0,255}
 
 
 /**
@@ -24,8 +34,9 @@ public:
 	 *
 	 * @param	coord	width	Largeur de l'image, en pixels
 	 * @param	coord	height	Hauteur de l'image, en pixels
+	 * @param	RGBColor	bgc	Couleur de fond, blanche par défaut
 	 */
-	PPMImage(coord width, coord height);
+	PPMImage(coord width, coord height, RGBColor bgc = White);
 	/**
 	 * Destructeur de la classe, désalloue map
 	 */
