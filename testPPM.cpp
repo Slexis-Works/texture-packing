@@ -11,5 +11,7 @@ int main(int argc, char *argv[]) {
 
 	img.saveImage("test.ppm");
 
+	PPMImage::saveRectangle(30, 40, Green, "testSaveRectangle.ppm");
+
 	return 0;
 }
