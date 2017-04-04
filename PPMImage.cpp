@@ -17,7 +17,6 @@ PPMImage::~PPMImage() {
 }
 
 void PPMImage::drawPix(coord x, coord y, RGBColor col) {
-	std::cerr << "Printing a pixel at " << x << " ; " << y << std::endl;
 	if (x < 0 || x >= width
 		|| y < 0 || y >= height)
 		return;

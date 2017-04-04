@@ -1,3 +1,6 @@
 #include <iostream>
+#include <string>
+
 #include "PPMImage.hpp"
-#include "Rectangle.hpp"
+
+
