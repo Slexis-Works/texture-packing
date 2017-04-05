@@ -7,11 +7,12 @@ Rectangle::Rectangle(coord x, coord y, coord w, coord h, RGBColor col)
 , h(h)
 , col(col)
 {
-
 }
 
-Rectangle::Rectangle(coord w, coord h, RGBColor col) {
-	Rectangle(0, 0, w, h, col);
+Rectangle::Rectangle(coord w, coord h, RGBColor col)
+: Rectangle(0, 0, w, h, col)
+{
+
 }
 
 void Rectangle::flip() {

@@ -17,8 +17,8 @@ PPMImage::~PPMImage() {
 }
 
 void PPMImage::drawPix(coord x, coord y, RGBColor col) {
-	if (x < 0 || x >= width
-		|| y < 0 || y >= height)
+	if (/*x < 0 || */x >= width
+		|| /*y < 0 ||*/ y >= height)
 		return;
 	map[y*width + x] = col;
 }

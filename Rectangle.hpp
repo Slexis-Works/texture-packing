@@ -1,5 +1,5 @@
-#ifndef RECTANGLE_H
-#define RECTANGLE_H
+#ifndef RECTANGLE_HPP
+#define RECTANGLE_HPP
 
 #include "PPMImage.hpp"
 
@@ -43,6 +43,19 @@ public:
 	 */
 	bool collides(const Rectangle o);
 
+	// GETters
+
+	coord getX() { return x;}
+	coord getY() { return y;}
+	coord getW() { return w;}
+	coord getH() { return h;}
+
+	// SETters
+
+	void setCoords(coord nx, coord ny) { x = nx; y = ny;}
+	void setX(coord nx) { x = nx;}
+	void setY(coord ny) { y = ny;}
+
 private:
 	coord x;
 	coord y;
@@ -52,4 +65,4 @@ private:
 	RGBColor col;
 };
 
-#endif // RECTANGLE_H
+#endif // RECTANGLE_HPP

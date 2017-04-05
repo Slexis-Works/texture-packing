@@ -1,5 +1,5 @@
-#ifndef PPMIMAGE_H
-#define PPMIMAGE_H
+#ifndef PPMIMAGE_HPP
+#define PPMIMAGE_HPP
 
 #include <iostream>
 #include <string>
@@ -94,4 +94,4 @@ private:
 
 };
 
-#endif // PPMIMAGE_H
+#endif // PPMIMAGE_HPP
