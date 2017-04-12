@@ -14,8 +14,8 @@
 #include "Rectangle.hpp"
 #include "Bin.hpp"
 
+#include "algoFF.hpp"
 #include "algoFFDH.hpp"
-#include "algoSFFDH.hpp"
 
 int main (int argc, char *argv[]);
 

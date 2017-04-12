@@ -13,8 +13,8 @@ int main (int argc, char *argv[]) {
 	size_t nbTests(1);
 	std::vector<std::string> algosChoisis;
 	std::map<std::string, funcAlgo> algosDispos;
+	algosDispos["FF"] = algoFF;
 	algosDispos["FFDH"] = algoFFDH;
-	algosDispos["SFFDH"] = algoSFFDH;
 	//algosDispos.push_back("AD");
 	//algosDispos.push_back("Harmonic");
 	//algosDispos.push("");
@@ -254,8 +254,8 @@ void showHelp(const std::string name) {
 			<< "\t--rectangles : nom du dossier où mettre les rectangles initiaux. Ignoré si le nombre de tests n'est pas 1. Défaut : les rectangles ne sont pas produits" << std::endl
 			<< "\tAucun, un ou plusieurs algorithmes peuvent être spécifiés. Ils travailleront avec les mêmes données à chaque test. Si aucun n'est précisé, tous ceux disponibles seront traités" << std::endl
 			<< "Algorithmes disponibles :" << std::endl
-			<< "\tFFDH : First Fit Decreasing Height (sans tri de l'entrée)" << std::endl
-			<< "\tSFFDH : First Fit Decreasing Height avec tri par hauteur" << std::endl;
+			<< "\tFF : First Fit" << std::endl
+			<< "\tFFDH : First Fit Decreasing Height (tri par hauteur)" << std::endl;
 }
 
 bool isBadInt(const std::string s){

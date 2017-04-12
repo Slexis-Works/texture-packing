@@ -1,9 +1,16 @@
 #include "algoFFDH.hpp"
 
 void algoFFDH(const std::vector<Rectangle> rects, std::vector<Bin> &bins, coord bw, coord by) {
+	// Tri des données
+	std::vector<Rectangle> sortedRects;
+	for (const Rectangle &rect : rects) {
+		sortedRects.push_back(rect);
+	}
+	std::sort(sortedRects.begin(), sortedRects.end(), goesBeforeByHeight);
+
 	// Création de tous les étages
 	std::vector<Shelf> shelves;
-	for (const Rectangle &rect : rects) {
+	for (const Rectangle &rect : sortedRects) {
 		bool inserted = false;
 		for (auto & shelf : shelves) {
 			if (shelf.putRect(rect)) {
@@ -28,4 +35,8 @@ void algoFFDH(const std::vector<Rectangle> rects, std::vector<Bin> &bins, coord 
 		curY += shelf.getHeight();
 		bins.back().importShelf(shelf);
 	}
+}
+
+bool goesBeforeByHeight(const Rectangle rect1, const Rectangle rect2) {
+	return rect1.getH() > rect2.getH();
 }
