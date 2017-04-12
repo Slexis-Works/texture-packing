@@ -70,14 +70,21 @@ public:
 	void fillRect(coord xs, coord ys, coord w, coord h, RGBColor col);
 
 	/**
-	 * Génére et enregistre le fichier image
+	 * Génére et enregistre le fichier image au format PPM Binaire
 	 *
 	 * @param	std::string	path	Chemin du fichier
 	 */
 	void  saveImage(std::string path);
 
 	/**
-	 * Crée et enregistre une image unicolore
+	 * Génére et enregistre le fichier image au format PPM ASCII (très lourd)
+	 *
+	 * @param	std::string	path	Chemin du fichier
+	 */
+	void  saveImageASCII(std::string path);
+
+	/**
+	 * Crée et enregistre une image unicolore au format PPM ASCII
 	 *
 	 * @param	coord	width	Largeur de l'image, en pixels
 	 * @param	coord	height	Hauteur de l'image, en pixels

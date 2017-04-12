@@ -2,7 +2,10 @@ CC=g++
 CFLAGS=-Wall -Wextra -g -std=c++11
 LDFLAGS=-g
 
-all: texture-packing testPPM PPMImage.o Rectangle.o Shelf.o
+LIBS=PPMImage.o Rectangle.o Shelf.o Bin.o algoFFDH.o algoSFFDH.o
+PROGS=testPPM texture-packing
+
+all:  $(LIBS) $(PROGS)
 
 %: %.o
 	$(CC) -o $@ $(LDFLAGS) $^
@@ -10,10 +13,10 @@ all: texture-packing testPPM PPMImage.o Rectangle.o Shelf.o
 %.o: %.cpp %.hpp
 	$(CC) -o $@ $(CFLAGS) -c $<
 
-testPPM: testPPM.o PPMImage.o Rectangle.o Shelf.o
+testPPM: testPPM.o $(LIBS)
 	$(CC) -o $@ $(LDFLAGS) $^
 
-texture-packing: texture-packing.o PPMImage.o
+texture-packing: texture-packing.o $(LIBS)
 	$(CC) -o $@ $(LDFLAGS) $^
 
 Rectangle.o: Rectangle.cpp Rectangle.hpp PPMImage.o

@@ -35,6 +35,21 @@ void PPMImage::fillRect(coord xs, coord ys, coord w, coord h, RGBColor col) {
 void PPMImage::saveImage(std::string path) {
 	std::ofstream file(path);
 
+	file << "P6" << std::endl
+		<< width << ' ' << height << std::endl
+		<< "255" << std::endl;
+
+	for (coord y=0 ; y<height ; ++y) {
+		for (coord x=0 ; x<width ; ++x) {
+			RGBColor curp = map[y*width + x];
+			file << curp.r << curp.g << curp.b;
+		}
+	}
+}
+
+void PPMImage::saveImageASCII(std::string path) {
+	std::ofstream file(path);
+
 	file << "P3" << std::endl
 		<< width << ' ' << height << std::endl
 		<< "255" << std::endl;
@@ -59,8 +74,6 @@ void PPMImage::saveRectangle(coord w, coord h, RGBColor col, std::string path) {
 	file << "P3" << std::endl
 		<< w << ' ' << h << std::endl
 		<< "255" << std::endl;
-
-
 
 	for (coord y=0 ; y<h ; ++y) {
 		for (coord x=0 ; x<w ; ++x) {

@@ -13,27 +13,27 @@ public:
 	 *
 	 * @param	coord	width	Largeur maximale de l'étagère, en pixels
 	 * @param	coord	y	Ordonnée du bord inférieur de l'étagère
-	 * @param	Rectangle	first	Rectangle calé à gauche
+	 * @param	Rectangle&	first	Rectangle calé à gauche
 	 */
-	Shelf(coord width, coord y, Rectangle* first);
+	Shelf(coord width, coord y, const Rectangle &first);
 
 	/**
 	 * Essaie d'insérer le rectangle donné et modifie ses coordonnées
 	 *
-	 * @param	Rectangle*	rect	Rectangle à insérer, calé en bas et à droite du bloc le plus à droite
+	 * @param	Rectangle&	rect	Rectangle à insérer, calé en bas et à droite du bloc le plus à droite
 	 *
 	 * @return	bool	Indique si l'insertion a pu être acceptée
 	 */
-	bool putRect(Rectangle *rect);
+	bool putRect(const Rectangle &rect);
 
 	/**
 	 * Essaie d'insérer le rectangle donné en autorisant les rotations
 	 *
-	 * @param	Rectangle*	rect	Rectangle à insérer, pouvant être tourné
+	 * @param	Rectangle&	rect	Rectangle à insérer, pouvant être tourné
 	 *
 	 * @return	int	0 en cas d'impossibilité, 1 si l'insertion a pu se faire directement, 2 s'il y a eu besoin d'une rotation
 	 */
-	int putRotatableRect(Rectangle *rect);
+	int putRotatableRect(const Rectangle &rect);
 
 	/**
 	 * Modifie l'ordonnée de l'étage et des rectangles présents
@@ -47,14 +47,23 @@ public:
 	 *
 	 * @param	PPMImage&	img	Image sur laquelle dessiner
 	 */
-	void drawOn(PPMImage &img);
+	void drawOn(PPMImage &img) const;
 
+	/**
+	 * Permet l'accès en lecture à tous les rectangles contenus
+	 */
+	const std::vector<Rectangle>& getRects() const { return rects;}
+
+	/**
+	 * Renvoie la hauteur de l'étage
+	 */
+	coord getHeight() const { return height;}
 private:
 	coord height;
 	coord y;
 	coord curWidth;
 	coord maxWidth;
-	std::vector<Rectangle*> rects;
+	std::vector<Rectangle> rects;
 };
 
 #endif // SHELF_HPP
