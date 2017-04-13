@@ -1,6 +1,6 @@
 #include "algoFFDH.hpp"
 
-void algoFFDH(const std::vector<Rectangle> rects, std::vector<Bin> &bins, coord bw, coord by) {
+void algoFFDH(const std::vector<Rectangle> &rects, std::vector<Bin> &bins, coord bw, coord by) {
 	// Tri des données
 	std::vector<Rectangle> sortedRects;
 	for (const Rectangle &rect : rects) {

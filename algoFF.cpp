@@ -1,6 +1,6 @@
 #include "algoFF.hpp"
 
-void algoFF(const std::vector<Rectangle> rects, std::vector<Bin> &bins, coord bw, coord by) {
+void algoFF(const std::vector<Rectangle> &rects, std::vector<Bin> &bins, coord bw, coord by) {
 	// Création de tous les étages
 	std::vector<Shelf> shelves;
 	for (const Rectangle &rect : rects) {

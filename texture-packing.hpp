@@ -23,4 +23,4 @@ void showUsage(const std::string name);
 void showHelp(const std::string name);
 bool isBadInt(const std::string s);
 
-typedef void (*funcAlgo)(const std::vector<Rectangle>, std::vector<Bin>&, coord, coord);
+typedef void (*funcAlgo)(const std::vector<Rectangle>&, std::vector<Bin>&, coord, coord);
