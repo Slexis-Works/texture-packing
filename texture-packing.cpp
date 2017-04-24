@@ -15,6 +15,8 @@ int main (int argc, char *argv[]) {
 	std::map<std::string, funcAlgo> algosDispos;
 	algosDispos["FF"] = algoFF;
 	algosDispos["FFDH"] = algoFFDH;
+	algosDispos["NFDH"] = algoNFDH;
+	algosDispos["BFDH"] = algoBFDH;
 	//algosDispos.push_back("AD");
 	//algosDispos.push_back("Harmonic");
 	//algosDispos.push("");
@@ -255,7 +257,9 @@ void showHelp(const std::string name) {
 			<< "\tAucun, un ou plusieurs algorithmes peuvent être spécifiés. Ils travailleront avec les mêmes données à chaque test. Si aucun n'est précisé, tous ceux disponibles seront traités" << std::endl
 			<< "Algorithmes disponibles :" << std::endl
 			<< "\tFF : First Fit" << std::endl
-			<< "\tFFDH : First Fit Decreasing Height (tri par hauteur)" << std::endl;
+			<< "\tFFDH : First Fit Decreasing Height (tri par hauteur)" << std::endl
+			<< "\tNFDH : Next Fit Decreasing Height" << std::endl
+			<< "\tBFDH : Best Fit Decreasing Height" << std::endl;
 }
 
 bool isBadInt(const std::string s){

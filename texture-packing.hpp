@@ -16,6 +16,8 @@
 
 #include "algoFF.hpp"
 #include "algoFFDH.hpp"
+#include "algoNFDH.hpp"
+#include "algoBFDH.hpp"
 
 int main (int argc, char *argv[]);
 

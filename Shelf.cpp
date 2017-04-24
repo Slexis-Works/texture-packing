@@ -1,6 +1,5 @@
 #include "Shelf.hpp"
 
-
 Shelf::Shelf(coord width, coord y, const Rectangle& first)
 : height(first.getH())
 , y(y)

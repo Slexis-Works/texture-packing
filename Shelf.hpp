@@ -58,6 +58,11 @@ public:
 	 * Renvoie la hauteur de l'étage
 	 */
 	coord getHeight() const { return height;}
+
+	/**
+	 * Renvoie l'espace restant de l'étage
+	 */
+	 coord getEmptySpace() { return maxWidth-curWidth;}
 private:
 	coord height;
 	coord y;
