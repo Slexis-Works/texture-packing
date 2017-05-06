@@ -224,8 +224,43 @@ int main (int argc, char *argv[]) {
 		if (!outputRect.empty()) {
 			std::cerr << "Attention : les rectangles ne peuvent être enregistrés s'il y a plusieurs tests" << std::endl;
 		}
-		for (size_t i=0 ; i < nbTests ; ++i) {
-			std::cout << distriSize(randGen) << std::endl;
+
+		std::cout << "Démarrage de " << nbTests << " pour " << algosChoisis.size() << " algorithme(s)" << std::endl;
+		size_t nbBlocsParTest[] = {20, 40, 60, 80, 100};
+
+		std::uniform_int_distribution<coord> classesDistriWidth[] = {
+			std::uniform_int_distribution<coord>(100*2/3, 100),
+			std::uniform_int_distribution<coord>(1, 100/2),
+			std::uniform_int_distribution<coord>(100/2, 100),
+			std::uniform_int_distribution<coord>(1, 100/2)
+		};
+		std::uniform_int_distribution<coord> classesDistriHeight[] = {
+			std::uniform_int_distribution<coord>(1, 100/2),
+			std::uniform_int_distribution<coord>(100*2/3, 100),
+			std::uniform_int_distribution<coord>(100/2, 100),
+			std::uniform_int_distribution<coord>(1, 100/2)
+		};
+
+		for (size_t nbBI = 0 ; nbBI < 5 ; ++nbBI) {
+			for (size_t classe = 0 ; classe < 4 ; ++classe) {
+				for (size_t t = 0 ; t < nbTests ; ++t) {
+					std::vector<Rectangle> rects;
+					long lowerBound = 0;
+					for (size_t r = 0 ; r < nbBlocsParTest[nbBI] ; ++r) {
+						int rW = classesDistriWidth[classe](randGen);
+						int rH = classesDistriHeight[classe](randGen);
+						rects.push_back(Rectangle(rW, rH, distriColor(randGen)));
+						lowerBound += rW * rH;
+					}
+					lowerBound = ceil(((float)lowerBound)/10000.0);
+					std::cout << "LowerBound pour ces rectangles : " << lowerBound << std::endl;
+					for (std::string alg : algosChoisis) {
+						std::vector<Bin> res;
+						algosDispos[alg](rects, res, 100, 100);
+						std::cout << "Résultat " << t << " pour algo " << alg << " avec " << rects.size() << " blocs pour la classe " << classe << " : " << res.size() << " boîtes (" << (res.size() - lowerBound) << ")" << std::endl;
+					}
+				}
+			}
 		}
 	}
 
@@ -252,7 +287,7 @@ void showHelp(const std::string name) {
 			<< "\t--lt : largeur en pixels de la texture sur laquelle on doit placer les rectangles. Défaut : 2048" << std::endl
 			<< "\t--ht : hauteur en pixels de la texture sur laquelle on doit placer les rectangles. Défaut : 2048" << std::endl
 			<< "\t--sortie : nom du dossier où envoyer les résultats. Si plusieurs algorithmes sont spécifiés, leurs noms y seront rajoutés. Défaut : seed_NomAlgo" << std::endl
-			<< "\t--tests : nombre de tests à effectuer. Si 1, le résultat de l'algorithme sera mis dans le dossier. Sinon, ce sera le meilleur et le pire cas" << std::endl
+			<< "\t--tests : nombre de tests à effectuer. Si 1, le résultat de l'algorithme sera mis dans le dossier. Sinon, ce sera le nombre de tests par classe et nombre de blocs dans la variante de la méthode proposée par Martello et Vigo dans 'Exact solution of the two-dimensional 8nite bin packing problem'" << std::endl
 			<< "\t--rectangles : nom du dossier où mettre les rectangles initiaux. Ignoré si le nombre de tests n'est pas 1. Défaut : les rectangles ne sont pas produits" << std::endl
 			<< "\tAucun, un ou plusieurs algorithmes peuvent être spécifiés. Ils travailleront avec les mêmes données à chaque test. Si aucun n'est précisé, tous ceux disponibles seront traités" << std::endl
 			<< "Algorithmes disponibles :" << std::endl
