@@ -33,3 +33,6 @@ Shelf.o: Shelf.cpp Shelf.hpp PPMImage.o Rectangle.o
 
 clean:
 	rm -f *.o
+
+mrproper: clean
+	rm -f $(PROGS)
