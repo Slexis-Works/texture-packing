@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <algorithm>
+#include <limits>
 
 #include "Rectangle.hpp"
 #include "Shelf.hpp"

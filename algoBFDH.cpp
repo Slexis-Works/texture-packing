@@ -10,32 +10,49 @@ void algoBFDH(const std::vector<Rectangle> &rects, std::vector<Bin> &bins, coord
 
 	// Création de tous les étages
 	std::vector<Shelf> shelves;
+
+	// Insertion du premier rectangle afin d'initialiser un premier étage
 	shelves.push_back(Shelf(bw, 0, sortedRects[0]));
-	unsigned int i = 0;
-	unsigned int curr = i;
+
+	int i = 0;
+	int currSize = 0;
+	int minShelf = 0;
+	int minShelfSize = std::numeric_limits<int>::max();
+
+	// On cherche, pour chaque élément, l'étage qui laissera le moins d'espace horizontal lorsqu'on l'ajoutera
 	for (const Rectangle &rect : sortedRects) {
 		for (auto & shelf : shelves) {
-			if (shelf.getEmptySpace() <= shelves.at(curr).getEmptySpace()
-					&& shelf.getEmptySpace() >= rect.getW()) {
-				curr = i;
-			}
-			else if (i == shelves.size()-1){
-				curr = i;
-			}
-			else {
+			// On calcul l'espace horizontal restant de l'étage courant après insertion de l'élément
+			currSize = shelf.getEmptySpace() - rect.getW();
+
+			// Si l'espace horizontal est insuffisant, on avance dans le for
+			if (currSize < 0) {
 				i++;
+				continue;
 			}
+
+			// Sinon, on regarde si l'espace de l'étage courant et inférieur à l'espace trouvé plus tôt dans la boucle
+			if (minShelfSize > currSize) {
+				minShelf = i;
+				minShelfSize = currSize;
+			}
+
+			i++;
 		}
 
-		if (shelves.at(curr).getEmptySpace() < rect.getW()) {
+		// Si pas de place, on insère un nouvel étage
+		if (shelves.at(minShelf).getEmptySpace() < rect.getW()) {
 			shelves.push_back(Shelf(bw, 0, rect));
 		}
+		// Sinon insertion de l'élément
 		else {
-			shelves.at(curr).putRect(rect);
+			shelves.at(minShelf).putRect(rect);
 		}
 
-		i=0;
-		curr=i;
+		// Réinitialisation de variable
+		i = 0;
+		minShelf = 0;
+		minShelfSize = std::numeric_limits<int>::max();
 	}
 
 	// Insertion de tous les étages de manière naïve

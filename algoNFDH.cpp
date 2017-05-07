@@ -14,8 +14,8 @@ void algoNFDH(const std::vector<Rectangle> &rects, std::vector<Bin> &bins, coord
 	// Insertion du premier rectangle afin d'initialiser un premier étage
 	shelves.push_back(Shelf(bw, 0, sortedRects[0]));
 
-	int i = 0; // Compteur des étages
-	int j = 0; // Compteur des rectangles
+	unsigned int i = 0; // Compteur des étages
+	unsigned int j = 0; // Compteur des rectangles
 
 	for (const Rectangle &rect : sortedRects) {
 		bool inserted = true;
