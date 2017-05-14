@@ -11,7 +11,8 @@ Shelf::Shelf(coord width, coord y, const Rectangle& first)
 
 bool Shelf::putRect(const Rectangle &rect) {
 	coord rw = rect.getW();
-	if (rect.getH() > rects.back().getH()
+	//if (rect.getH() > rects.back().getH()
+	if (rect.getH() > height
 		|| rw > maxWidth - curWidth) {
 		return false;
 	}

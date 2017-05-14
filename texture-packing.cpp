@@ -242,6 +242,10 @@ int main (int argc, char *argv[]) {
 			std::uniform_int_distribution<coord>(1, 100/2)
 		};
 
+		std::map<std::string, long> scoresAlgos;
+		for (std::string alg : algosChoisis) {
+			scoresAlgos[alg] = 0;
+		}
 		for (size_t nbBI = 0 ; nbBI < 5 ; ++nbBI) {
 			for (size_t classe = 0 ; classe < 4 ; ++classe) {
 				for (size_t t = 0 ; t < nbTests ; ++t) {
@@ -265,10 +269,14 @@ int main (int argc, char *argv[]) {
 					for (std::string alg : algosChoisis) {
 						std::vector<Bin> res;
 						algosDispos[alg](rects, res, 100, 100);
+						scoresAlgos[alg] += res.size() - lowerBound;
 						//std::cout << "Résultat " << t << " pour algo " << alg << " avec " << rects.size() << " blocs pour la classe " << classe << " : " << res.size() << " boîtes (" << (res.size() - lowerBound) << ")" << std::endl;
 					}
 				}
 			}
+		}
+		for (std::string alg : algosChoisis) {
+			std::cout << alg << " : " << scoresAlgos[alg] << " blocs de différence pour une moyenne de " << ((double)scoresAlgos[alg])/(double)(nbTests*20) << std::endl;
 		}
 	}
 
