@@ -228,13 +228,14 @@ int main (int argc, char *argv[]) {
 		std::cout << "Démarrage de " << nbTests << " pour " << algosChoisis.size() << " algorithme(s)" << std::endl;
 		size_t nbBlocsParTest[] = {20, 40, 60, 80, 100};
 
-		std::uniform_int_distribution<coord> classesDistriWidth[] = {
+		std::uniform_int_distribution<unsigned char> probaType(0, 9);
+		std::uniform_int_distribution<coord> typesDistriL[] = {
 			std::uniform_int_distribution<coord>(100*2/3, 100),
 			std::uniform_int_distribution<coord>(1, 100/2),
 			std::uniform_int_distribution<coord>(100/2, 100),
 			std::uniform_int_distribution<coord>(1, 100/2)
 		};
-		std::uniform_int_distribution<coord> classesDistriHeight[] = {
+		std::uniform_int_distribution<coord> typesDistriH[] = {
 			std::uniform_int_distribution<coord>(1, 100/2),
 			std::uniform_int_distribution<coord>(100*2/3, 100),
 			std::uniform_int_distribution<coord>(100/2, 100),
@@ -247,17 +248,24 @@ int main (int argc, char *argv[]) {
 					std::vector<Rectangle> rects;
 					long lowerBound = 0;
 					for (size_t r = 0 ; r < nbBlocsParTest[nbBI] ; ++r) {
-						int rW = classesDistriWidth[classe](randGen);
-						int rH = classesDistriHeight[classe](randGen);
-						rects.push_back(Rectangle(rW, rH, distriColor(randGen)));
-						lowerBound += rW * rH;
+						unsigned char resProba, type;
+						resProba = probaType(randGen);
+						if (resProba < 7) {
+							type = classe;
+						} else {
+							type = (classe + resProba - 6)%4;
+						}
+						int rL = typesDistriL[type](randGen);
+						int rH = typesDistriH[type](randGen);
+						rects.push_back(Rectangle(rL, rH, distriColor(randGen)));
+						lowerBound += rL * rH;
 					}
 					lowerBound = ceil(((float)lowerBound)/10000.0);
-					std::cout << "LowerBound pour ces rectangles : " << lowerBound << std::endl;
+					//std::cout << "LowerBound pour ces rectangles : " << lowerBound << std::endl;
 					for (std::string alg : algosChoisis) {
 						std::vector<Bin> res;
 						algosDispos[alg](rects, res, 100, 100);
-						std::cout << "Résultat " << t << " pour algo " << alg << " avec " << rects.size() << " blocs pour la classe " << classe << " : " << res.size() << " boîtes (" << (res.size() - lowerBound) << ")" << std::endl;
+						//std::cout << "Résultat " << t << " pour algo " << alg << " avec " << rects.size() << " blocs pour la classe " << classe << " : " << res.size() << " boîtes (" << (res.size() - lowerBound) << ")" << std::endl;
 					}
 				}
 			}
