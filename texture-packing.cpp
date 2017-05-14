@@ -225,7 +225,7 @@ int main (int argc, char *argv[]) {
 			std::cerr << "Attention : les rectangles ne peuvent être enregistrés s'il y a plusieurs tests" << std::endl;
 		}
 
-		std::cout << "Démarrage de " << nbTests << " pour " << algosChoisis.size() << " algorithme(s)" << std::endl;
+		std::cout << "Démarrage de " << nbTests << " tests par classe et par nombre de blocs pour " << algosChoisis.size() << " algorithme(s)" << std::endl;
 		size_t nbBlocsParTest[] = {20, 40, 60, 80, 100};
 
 		std::uniform_int_distribution<unsigned char> probaType(0, 9);
